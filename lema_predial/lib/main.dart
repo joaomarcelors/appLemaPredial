@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lema_predial/views/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        primaryColor: Colors.green,
         primarySwatch: Colors.blue,
       ),
-      home: const Center(child: Text('Lema Predial'),),
+      home: DashBoardScreen(),
     );
   }
 }
