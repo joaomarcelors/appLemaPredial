@@ -10,6 +10,11 @@ pubspec.lock
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/
+lema_predial/android
+lema_predial/ios
+lema_predial/linux
+lema_predial/web
+lema_predial/test
 
 # Avoid committing generated Javascript files:
 *.dart.js
