@@ -33,6 +33,8 @@ class CaixaDagua with ChangeNotifier {
       );
     }
 
+    print(_caixadgua!.dateTime);
+
     notifyListeners();
     return Future.value();
   }

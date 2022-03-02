@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lema_predial/providers/caixa_dagua.dart';
-import 'package:lema_predial/widgets/caixa_card.dart';
+import 'package:lema_predial/widgets/caixa_item.dart';
+import 'package:lema_predial/widgets/portao_item.dart';
 import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatelessWidget {
@@ -32,9 +33,11 @@ class DashBoardScreen extends StatelessWidget {
             } else {
               return Consumer<CaixaDagua>(
                 builder: (ctx, caixaDgua, child) {
-                  return ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (ctx, i) => CaixaCard(caixaDgua.getInfos),
+                  return ListView(
+                    children: [
+                      CaixaItem(caixaDgua.getInfos),
+                      PortaoItem(caixaDgua.getInfos),
+                    ],
                   );
                 },
               );
