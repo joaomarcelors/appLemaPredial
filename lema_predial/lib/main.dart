@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lema_predial/providers/caixa_dagua.dart';
+import 'package:lema_predial/providers/portao_garagem.dart';
 import 'package:lema_predial/utils/app_routes.dart';
 import 'package:lema_predial/views/dashboard_screen.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => CaixaDagua(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => PortaoGaragem(),
         ),
       ],
       child: MaterialApp(

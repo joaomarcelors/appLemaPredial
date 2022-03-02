@@ -17,15 +17,6 @@ class Reservatorio {
     return boias.where((boia) => boia).length;
   }
 
-    // 0 0% all white
-  // 1 15% 1red ...white
-  // 2 30% 2red ...white
-  // 3 45% 3yellow
-  // 4 60% 4yellow
-  // 5 80% 5 blue
-  // 6 100% 6blue
-  // 7 transbordamento 7 red
-
   double? get getNivel{
     if(_getQtdBoiaTrue == qtdBoia){
       return null;

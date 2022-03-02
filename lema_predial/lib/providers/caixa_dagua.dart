@@ -12,7 +12,7 @@ class CaixaDagua with ChangeNotifier {
   }
 
   Future<void> loadInfos() async {
-    final response = await http.get(Uri.parse("${Constants.API_URL}/get.php"));
+    final response = await http.get(Uri.parse("${Constants.API_URL}/get_caixa_a.php"));
 
     var data = json.decode(response.body);
 

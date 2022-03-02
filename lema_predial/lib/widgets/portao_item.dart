@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lema_predial/providers/portao.dart';
 import 'package:lema_predial/providers/reservatorio.dart';
 
 class PortaoItem extends StatelessWidget {
-  final Reservatorio reservatorio;
-  late int qtdBoiasTrue;
-  PortaoItem(this.reservatorio);
+  final Portao portao;
+
+  PortaoItem(this.portao);
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +68,18 @@ class PortaoItem extends StatelessWidget {
                 Row(
                   children: [
                     Icon(
+                      portao.status ? Icons.warning_amber : Icons.done,
+                      color: portao.status
+                          ? Theme.of(context).errorColor
+                          : Colors.green[700],
+
                       //Icons.access_time_outlined, relogio
-                      Icons.done,
+                      //Icons.done,
                       size: 28.0,
                     ),
                     SizedBox(width: 20),
                     Text(
-                      "Fechado",
+                      portao.status ? 'Aberto' : 'Fechado',
                       style: TextStyle(
                           fontSize: 26.0,
                           fontWeight: FontWeight.bold,
@@ -81,27 +87,28 @@ class PortaoItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (portao.status)
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time_outlined,
+                        size: 28.0,
+                        color: Colors.grey[800],
+                      ),
+                      SizedBox(width: 20),
+                      Text(
+                        "Aberto há 00:00:22",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.grey[800],
+                            fontFamily: 'Lato'),
+                      ),
+                    ],
+                  ),
                 Row(
                   children: [
-                    Icon(
-                      Icons.access_time_outlined,
-                      size: 28.0,
-                      color: Colors.grey[800],
-                    ),
-                    SizedBox(width: 20),
                     Text(
-                      "Aberto há 00:00:22",
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.grey[800],
-                          fontFamily: 'Lato'),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(reservatorio.dateTime)}',
+                      'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(portao.dateTime)}',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -113,18 +120,6 @@ class PortaoItem extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildNivel(tamanho, color) {
-    return Container(
-      width: tamanho,
-      height: 20,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1.5),
-        borderRadius: BorderRadius.circular(5),
-        color: color,
-      ),
     );
   }
 }

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lema_predial/providers/caixa_dagua.dart';
+import 'package:lema_predial/providers/portao_garagem.dart';
 import 'package:lema_predial/widgets/caixa_item.dart';
 import 'package:lema_predial/widgets/portao_item.dart';
 import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatelessWidget {
-  
+
   Future<void> _refreshInfos(BuildContext context) {
-    return Provider.of<CaixaDagua>(context, listen: false).loadInfos();
+    Provider.of<CaixaDagua>(context, listen: false).loadInfos();
+    return Provider.of<PortaoGaragem>(context, listen: false).loadInfos();
+    //muda isso dep
   }
+
+  // Future<void> _refreshInfos(BuildContext context) {
+  //   return Provider.of<CaixaDagua>(context, listen: false).loadInfos();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class DashBoardScreen extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () => _refreshInfos(context),
         child: FutureBuilder(
-          future: Provider.of<CaixaDagua>(context, listen: false).loadInfos(),
+          future: _refreshInfos(context),
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -31,15 +38,17 @@ class DashBoardScreen extends StatelessWidget {
             } else if (snapshot.error != null) {
               return Center(child: Text('Ocorreu um erro!'));
             } else {
-              return Consumer<CaixaDagua>(
-                builder: (ctx, caixaDgua, child) {
-                  return ListView(
-                    children: [
-                      CaixaItem(caixaDgua.getInfos),
-                      PortaoItem(caixaDgua.getInfos),
-                    ],
-                  );
-                },
+              return ListView(
+                children: [
+                  Consumer<CaixaDagua>(
+                    builder: (ctx, caixaDgua, child) =>
+                        CaixaItem(caixaDgua.getInfos),
+                  ),
+                  Consumer<PortaoGaragem>(
+                    builder: (ctx, pg, child) =>
+                        PortaoItem(pg.getInfos),
+                  ),
+                ],
               );
             }
           },
