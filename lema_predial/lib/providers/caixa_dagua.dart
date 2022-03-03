@@ -7,12 +7,13 @@ import 'package:lema_predial/utils/constants.dart';
 class CaixaDagua with ChangeNotifier {
   Reservatorio? _caixadgua;
 
-  Reservatorio get getInfos{
+  Reservatorio get getInfos {
     return _caixadgua as Reservatorio;
   }
 
   Future<void> loadInfos() async {
-    final response = await http.get(Uri.parse("${Constants.API_URL}/get_caixa_a.php"));
+    final response =
+        await http.get(Uri.parse("${Constants.API_URL}/get_caixa_a.php"));
 
     var data = json.decode(response.body);
 
@@ -20,7 +21,8 @@ class CaixaDagua with ChangeNotifier {
       _caixadgua = Reservatorio(
         cliCod: int.parse(data[0]['cli_cod']),
         qtdBoia: int.parse(data[0]['caa_qtd_boia']),
-        dateTime: DateTime.parse("${data[0]['caa_data']} ${data[0]['caa_hora']}"),
+        dateTime:
+            DateTime.parse("${data[0]['caa_data']} ${data[0]['caa_hora']}"),
         boias: [
           (data[0]['caa_boia1'] == '0'),
           (data[0]['caa_boia2'] == '0'),
@@ -31,9 +33,10 @@ class CaixaDagua with ChangeNotifier {
           (data[0]['caa_boia7'] == '0'),
         ],
       );
+      notifyListeners();
+    } else {
+      print('sem dados');
     }
-
-    print(_caixadgua!.dateTime);
 
     notifyListeners();
     return Future.value();

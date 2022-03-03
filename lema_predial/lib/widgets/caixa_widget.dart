@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/reservatorio.dart';
 
-class CaixaItem extends StatelessWidget {
+class CaixaWidget extends StatelessWidget {
   final Reservatorio reservatorio;
   late int qtdBoiasTrue;
-  CaixaItem(this.reservatorio);
+  CaixaWidget(this.reservatorio);
 
   @override
   Widget build(BuildContext context) {
-    
+
     const largura = 280.0;
     const diferenca = 15.0;
 

@@ -6,7 +6,6 @@ import 'package:lema_predial/providers/portao.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class PortaoGaragem with ChangeNotifier {
-  
   Portao? _pga;
   Portao get getInfos {
     return _pga as Portao;
@@ -18,8 +17,6 @@ class PortaoGaragem with ChangeNotifier {
 
     var data = jsonDecode(response.body);
 
-    print(data);
-
     if (data != null) {
       _pga = Portao(
         cliCod: int.parse(data[0]['cli_cod']),
@@ -27,12 +24,11 @@ class PortaoGaragem with ChangeNotifier {
         dateTime:
             DateTime.parse("${data[0]['pga_data']} ${data[0]['pga_hora']}"),
       );
+      notifyListeners();
     } else {
       print('sem dados!');
     }
 
-
-    notifyListeners();
     return Future.value();
   }
 }

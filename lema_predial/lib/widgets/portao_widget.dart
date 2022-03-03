@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/portao.dart';
-import 'package:lema_predial/providers/reservatorio.dart';
 
-class PortaoItem extends StatelessWidget {
+class PortaoWidget extends StatelessWidget {
 
   final Portao portao;
 
-  PortaoItem(this.portao);
+  PortaoWidget(this.portao);
 
   @override
   Widget build(BuildContext context) {
-    
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: Row(
-            children: const [
-              Icon(
-                Icons.garage,
-                size: 28.0,
-              ),
-              SizedBox(width: 20),
-              Text(
-                "Portão Garagem A",
-                style: TextStyle(
-                    fontSize: 26.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Lato'),
-              ),
-            ],
-          ),
+        Row(
+          children: const [
+            Icon(
+              Icons.garage,
+              size: 28.0,
+            ),
+            SizedBox(width: 20),
+            Text(
+              "Portão Garagem A",
+              style: TextStyle(
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Lato'),
+            ),
+          ],
         ),
         Row(
           children: [

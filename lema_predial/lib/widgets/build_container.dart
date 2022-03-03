@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/portao.dart';
 
-class StructItem extends StatelessWidget {
+class buildContainer extends StatelessWidget {
   final Widget child;
 
-  const StructItem({required this.child});
+  const buildContainer({required this.child});
 
   @override
   Widget build(BuildContext context) {
