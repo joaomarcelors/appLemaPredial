@@ -1,34 +1,26 @@
-import 'dart:convert';
+class PortaoGaragem {
+  
+  final String title;
+  final String api;
+  final int cliCod;
+  final bool status;
+  final DateTime dateTime;
 
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
-import 'package:lema_predial/providers/portao.dart';
-import 'package:lema_predial/utils/constants.dart';
+  PortaoGaragem({
+    required this.title,
+    required this.api,
+    required this.cliCod,
+    required this.status,
+    required this.dateTime,
+  });
 
-class PortaoGaragem with ChangeNotifier {
-  Portao? _pga;
-  Portao get getInfos {
-    return _pga as Portao;
-  }
+  String tempoAberto() {
+    int totalSegs = DateTime.now().difference(dateTime).inSeconds;
+    int segundo = totalSegs % 60;
+    int minutos = totalSegs ~/ 60;
+    int minuto = minutos % 60;
+    int hora = minutos ~/ 60;
 
-  Future<void> loadInfos() async {
-    final response =
-        await http.get(Uri.parse("${Constants.API_URL}/get_portao_a.php"));
-
-    var data = jsonDecode(response.body);
-
-    if (data != null) {
-      _pga = Portao(
-        cliCod: int.parse(data[0]['cli_cod']),
-        status: data[0]['pga_status'] == '1',
-        dateTime:
-            DateTime.parse("${data[0]['pga_data']} ${data[0]['pga_hora']}"),
-      );
-      notifyListeners();
-    } else {
-      print('sem dados!');
-    }
-
-    return Future.value();
+    return '${hora.toString().padLeft(2, '0')}:${minuto.toString().padLeft(2, '0')}:${segundo.toString().padLeft(2, '0')}';
   }
 }

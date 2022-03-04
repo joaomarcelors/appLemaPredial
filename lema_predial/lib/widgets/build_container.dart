@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lema_predial/providers/portao.dart';
+import 'package:lema_predial/providers/portao_garagem.dart';
 
 class buildContainer extends StatelessWidget {
   final Widget child;
@@ -21,10 +21,10 @@ class buildContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             color: Colors.green[700],
           ),
-          height: 325,
+          height: 320,
         ),
         Container(
-          height: 325,
+          height: 320,
           margin:
               const EdgeInsets.only(left: 16, bottom: 5, top: 10, right: 10),
           decoration: BoxDecoration(

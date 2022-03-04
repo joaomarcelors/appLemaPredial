@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lema_predial/providers/bombaCisterna.dart';
-import 'package:lema_predial/providers/caixa_dagua.dart';
-import 'package:lema_predial/providers/portao_garagem.dart';
+import 'package:lema_predial/providers/bombas_cisterna.dart';
+import 'package:lema_predial/providers/reservatorios.dart';
+import 'package:lema_predial/providers/portoes_garagem.dart';
 import 'package:lema_predial/utils/app_routes.dart';
 import 'package:lema_predial/views/dashboard_screen.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => CaixaDagua(),
+          create: (ctx) => Reservatorios(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => PortaoGaragem(),
+          create: (ctx) => PortoesGaragem(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => BombaCisterna(),
+          create: (ctx) => BombasCisterna(),
         ),
       ],
       child: MaterialApp(

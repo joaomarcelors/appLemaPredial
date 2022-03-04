@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lema_predial/providers/bomba.dart';
+import 'package:lema_predial/providers/bomba_cisterna.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class BombaWidget extends StatelessWidget {
-  final Bomba bcis;
+class BcisWidget extends StatelessWidget {
+  final BombaCisterna? bcis;
 
-  const BombaWidget(this.bcis);
+  const BcisWidget(this.bcis);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,14 @@ class BombaWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          children: const [
+          children: [
             Icon(
               Icons.settings,
               size: 28.0,
             ),
             SizedBox(width: 20),
             Text(
-              "Bomba Cisterna A",
+              "${bcis!.title}",
               style: TextStyle(
                   fontSize: 26.0,
                   fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class BombaWidget extends StatelessWidget {
             ),
             SizedBox(width: 20),
             Text(
-              bcis.status ? 'Ligada' : 'Desligada',
+              bcis!.status ? 'Ligada' : 'Desligada',
               style: TextStyle(
                   fontSize: 26.0,
                   fontWeight: FontWeight.bold,
@@ -51,13 +51,13 @@ class BombaWidget extends StatelessWidget {
             Icon(
               Icons.thermostat, //<30 blue <45
               size: 28.0,
-              color: bcis.temperatura < 45
-                  ? (bcis.temperatura < 30 ? Colors.blue[900] : Colors.yellow[600])
+              color: bcis!.temperatura < 45
+                  ? (bcis!.temperatura < 30 ? Colors.blue[900] : Colors.yellow[600])
                   : Colors.red,
             ),
             SizedBox(width: 20),
             Text(
-              "${bcis.temperatura.toStringAsFixed(0)}º",
+              "${bcis!.temperatura.toStringAsFixed(0)}º",
               style: TextStyle(
                   fontSize: 26.0,
                   fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class BombaWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(bcis.dateTime)}',
+              'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(bcis!.dateTime)}',
               style: TextStyle(
                 fontSize: 16,
               ),

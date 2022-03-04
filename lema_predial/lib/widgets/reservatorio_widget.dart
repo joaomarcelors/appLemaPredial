@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/reservatorio.dart';
 
-class CaixaWidget extends StatelessWidget {
-  final Reservatorio reservatorio;
+class reservatorioWidget extends StatelessWidget {
+
+  final Reservatorio? reservatorio;
   late int qtdBoiasTrue;
-  CaixaWidget(this.reservatorio);
+  reservatorioWidget(this.reservatorio);
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,14 @@ class CaixaWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          children: const [
+          children: [
             Icon(
               Icons.inventory,
               size: 28.0,
             ),
             SizedBox(width: 20),
             Text(
-              "Caixa d'água",
+              reservatorio!.title,
               style: TextStyle(
                   fontSize: 26.0,
                   fontWeight: FontWeight.bold,
@@ -43,8 +44,8 @@ class CaixaWidget extends StatelessWidget {
               ),
             ),
             Text(
-              reservatorio.getNivel != null
-                  ? '${reservatorio.getNivel!.ceil()} %'
+              reservatorio!.getNivel != null
+                  ? '${reservatorio!.getNivel!.ceil()} %'
                   : 'Transbordamento',
               style: TextStyle(
                 fontSize: 24.0,
@@ -57,13 +58,13 @@ class CaixaWidget extends StatelessWidget {
           children: [
             for (int i = 0; i < 7; i++)
               _buildNivel(largura - diferenca * i,
-                  reservatorio.selectColor(i + 1)),
+                  reservatorio!.selectColor(i + 1)),
           ],
         ),
         Row(
           children: [
             Text(
-              'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(reservatorio.dateTime)}',
+              'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(reservatorio!.dateTime)}',
               style: TextStyle(
                 fontSize: 16,
               ),
