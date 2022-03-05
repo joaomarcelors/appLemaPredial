@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/bomba_cisterna.dart';
@@ -44,6 +46,7 @@ class BcisWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Lato'),
             ),
+            Text('${Random().nextDouble().toStringAsFixed(4)}'),
           ],
         ),
         Row(

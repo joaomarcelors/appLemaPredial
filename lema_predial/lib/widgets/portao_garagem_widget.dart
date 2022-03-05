@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/portao_garagem.dart';
@@ -47,6 +49,7 @@ class PortaoGaragemWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Lato'),
             ),
+            Text('${Random().nextDouble().toStringAsFixed(4)}'),
           ],
         ),
         if (portao!.status)

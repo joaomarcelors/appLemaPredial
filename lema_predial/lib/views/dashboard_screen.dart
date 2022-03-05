@@ -39,16 +39,17 @@ class DashBoardScreen extends StatelessWidget {
             } else {
               return ListView(
                 children: [
-                  for (int idx = 0; idx < NAMES_RESERVATORIO.length; idx++)
-                    Consumer<Reservatorios>(
-                      builder: (ctx, reservatorio, child) => buildContainer(
-                        child: reservatorioWidget(reservatorio.reservatoriosList[idx]),
-                      ),
-                    ),
                   for (int idx = 0; idx < NAMES_PORTAO.length; idx++)
                     Consumer<PortoesGaragem>(
                       builder: (ctx, pg, child) => buildContainer(
                         child: PortaoGaragemWidget(pg.portoesList[idx]),
+                      ),
+                    ),
+                  for (int idx = 0; idx < NAMES_RESERVATORIO.length; idx++)
+                    Consumer<Reservatorios>(
+                      builder: (ctx, reservatorio, child) => buildContainer(
+                        child: reservatorioWidget(
+                            reservatorio.reservatoriosList[idx]),
                       ),
                     ),
                   for (int idx = 0; idx < NAMES_BCIS.length; idx++)

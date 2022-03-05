@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -7,8 +8,8 @@ import 'package:lema_predial/providers/portao_garagem.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class PortoesGaragem with ChangeNotifier {
-  
   List<PortaoGaragem> _portoesList = [];
+  Timer? _syncApiTimer;
   late int idx;
 
   List<PortaoGaragem> get portoesList => [..._portoesList];
@@ -42,6 +43,21 @@ class PortoesGaragem with ChangeNotifier {
     }
 
     notifyListeners();
+    _autoSyncAPI();
     return Future.value();
+  }
+
+  void _autoSyncAPI() {
+    if (_syncApiTimer != null) {
+      _syncApiTimer!.cancel();
+    }
+    //var count = 0;
+    _syncApiTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      //print(timer.tick);
+      //count++;
+      //if (count % 3 == 0) {
+      loadInfos();
+      // }
+    });
   }
 }

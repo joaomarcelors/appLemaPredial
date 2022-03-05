@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -6,8 +7,8 @@ import 'package:lema_predial/providers/reservatorio.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class Reservatorios with ChangeNotifier {
-  
   List<Reservatorio> _reservatoriosList = [];
+  Timer? _syncApiTimer;
   late int idx;
 
   List<Reservatorio> get reservatoriosList => [..._reservatoriosList];
@@ -20,7 +21,6 @@ class Reservatorios with ChangeNotifier {
     idx = 0;
 
     for (var name in NAMES_RESERVATORIO) {
-
       final response =
           await http.get(Uri.parse('${Constants.API_URL}/${name['API']}'));
       var data = json.decode(response.body);
@@ -51,6 +51,21 @@ class Reservatorios with ChangeNotifier {
     }
 
     notifyListeners();
+    _autoSyncAPI();
     return Future.value();
+  }
+
+  void _autoSyncAPI() {
+    if (_syncApiTimer != null) {
+      _syncApiTimer!.cancel();
+    }
+    //var count = 0;
+    _syncApiTimer = Timer.periodic(Duration(seconds: 10), (timer) {
+      //print(timer.tick);
+      //count++;
+      //if (count % 3 == 0) {
+        loadInfos();
+     // }
+    });
   }
 }

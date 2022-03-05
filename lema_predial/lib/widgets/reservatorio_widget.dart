@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/providers/reservatorio.dart';
@@ -45,13 +47,14 @@ class reservatorioWidget extends StatelessWidget {
             ),
             Text(
               reservatorio!.getNivel != null
-                  ? '${reservatorio!.getNivel!.ceil()} %'
+                  ? '${reservatorio!.getNivel!.ceil()} % '
                   : 'Transbordamento',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
-            )
+            ),
+            Text('${Random().nextDouble().toStringAsFixed(4)}'),
           ],
         ),
         Column(
