@@ -11,9 +11,10 @@ import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatelessWidget {
   Future<void> _refreshInfos(BuildContext context) async {
-    await Provider.of<BombasCisterna>(context, listen: false).loadInfos();
+  //  await Provider.of<BombasCisterna>(context, listen: false).loadInfos();
     await Provider.of<Reservatorios>(context, listen: false).loadInfos();
-    await Provider.of<PortoesGaragem>(context, listen: false).loadInfos();
+   // await Provider.of<Reservatorios>(context, listen: false).loadHistoric();
+   // await Provider.of<PortoesGaragem>(context, listen: false).loadInfos();
   }
 
   @override
@@ -39,25 +40,25 @@ class DashBoardScreen extends StatelessWidget {
             } else {
               return ListView(
                 children: [
-                  for (int idx = 0; idx < NAMES_PORTAO.length; idx++)
-                    Consumer<PortoesGaragem>(
-                      builder: (ctx, pg, child) => buildContainer(
-                        child: PortaoGaragemWidget(pg.portoesList[idx]),
-                      ),
-                    ),
-                  for (int idx = 0; idx < NAMES_RESERVATORIO.length; idx++)
+                  // for (int idx = 0; idx < NAMES_PORTAO.length; idx++)
+                  //   Consumer<PortoesGaragem>(
+                  //     builder: (ctx, pg, child) => buildContainer(
+                  //       child: PortaoGaragemWidget(pg.portoesList[idx]),
+                  //     ),
+                  //   ),
+                  for (int idx = 0; idx < NAMES_RESERVATORIO.length-1; idx++)
                     Consumer<Reservatorios>(
                       builder: (ctx, reservatorio, child) => buildContainer(
                         child: reservatorioWidget(
                             reservatorio.reservatoriosList[idx]),
                       ),
                     ),
-                  for (int idx = 0; idx < NAMES_BCIS.length; idx++)
-                    Consumer<BombasCisterna>(
-                      builder: (ctx, bcis, child) => buildContainer(
-                        child: BcisWidget(bcis.bcisList[idx]),
-                      ),
-                    ),
+                  // for (int idx = 0; idx < NAMES_BCIS.length; idx++)
+                  //   Consumer<BombasCisterna>(
+                  //     builder: (ctx, bcis, child) => buildContainer(
+                  //       child: BcisWidget(bcis.bcisList[idx]),
+                  //     ),
+                  //   ),
                 ],
               );
             }

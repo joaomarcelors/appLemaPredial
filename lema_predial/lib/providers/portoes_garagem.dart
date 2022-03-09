@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:lema_predial/data/file_names.dart';
-import 'package:lema_predial/providers/portao_garagem.dart';
+import 'package:lema_predial/models/portao_garagem.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class PortoesGaragem with ChangeNotifier {

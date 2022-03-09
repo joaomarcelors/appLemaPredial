@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:lema_predial/data/file_names.dart';
-import 'package:lema_predial/providers/bomba_cisterna.dart';
+import 'package:lema_predial/models/bomba_cisterna.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class BombasCisterna with ChangeNotifier {

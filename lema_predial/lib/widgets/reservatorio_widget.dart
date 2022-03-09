@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lema_predial/providers/reservatorio.dart';
+import 'package:lema_predial/models/reservatorio.dart';
+import 'package:lema_predial/utils/app_routes.dart';
 
 class reservatorioWidget extends StatelessWidget {
 
@@ -16,65 +17,73 @@ class reservatorioWidget extends StatelessWidget {
     const largura = 280.0;
     const diferenca = 15.0;
 
-    return Column(
+    return GestureDetector(
 
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Icon(
-              Icons.inventory,
-              size: 28.0,
-            ),
-            SizedBox(width: 20),
-            Text(
-              reservatorio!.title,
-              style: TextStyle(
-                  fontSize: 26.0,
+      onTap: (){
+        Navigator.of(context).pushNamed(
+          AppRoutes.reservatorioDetail,
+          arguments: reservatorio,
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.inventory,
+                size: 28.0,
+              ),
+              SizedBox(width: 20),
+              Text(
+                reservatorio!.title,
+                style: TextStyle(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Lato'),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Nível: ',
+                style: TextStyle(
+                  fontSize: 18.0,
+                ),
+              ),
+              Text(
+                reservatorio!.getNivel != null
+                    ? '${reservatorio!.getNivel!} % '
+                    : 'Transbordamento',
+                style: TextStyle(
+                  fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Lato'),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              'Nível: ',
-              style: TextStyle(
-                fontSize: 18.0,
+                ),
               ),
-            ),
-            Text(
-              reservatorio!.getNivel != null
-                  ? '${reservatorio!.getNivel!.ceil()} % '
-                  : 'Transbordamento',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+              Text('${Random().nextDouble().toStringAsFixed(4)}'),
+            ],
+          ),
+          Column(
+            children: [
+              for (int i = 0; i < 7; i++)
+                _buildNivel(largura - diferenca * i,
+                    reservatorio!.selectColor(i + 1)),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(reservatorio!.dateTime)}',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
-            ),
-            Text('${Random().nextDouble().toStringAsFixed(4)}'),
-          ],
-        ),
-        Column(
-          children: [
-            for (int i = 0; i < 7; i++)
-              _buildNivel(largura - diferenca * i,
-                  reservatorio!.selectColor(i + 1)),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              'Última leitura: ${DateFormat('HH:mm:ss dd/MM/yyyy').format(reservatorio!.dateTime)}',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 

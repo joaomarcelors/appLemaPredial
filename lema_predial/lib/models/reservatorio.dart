@@ -22,11 +22,11 @@ class Reservatorio {
     return boias.where((boia) => boia).length;
   }
 
-  double? get getNivel {
+  int? get getNivel {
     if (_getQtdBoiaTrue == qtdBoia) {
       return null;
     } else {
-      return (_getQtdBoiaTrue / (qtdBoia - 1)) * 100;
+      return ((_getQtdBoiaTrue / (qtdBoia - 1)) * 100).ceil();
     }
   }
 

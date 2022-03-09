@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lema_predial/providers/portao_garagem.dart';
+import 'package:lema_predial/models/portao_garagem.dart';
 
 class buildContainer extends StatelessWidget {
   final Widget child;

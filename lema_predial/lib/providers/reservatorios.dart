@@ -2,16 +2,23 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:lema_predial/data/file_names.dart';
-import 'package:lema_predial/providers/reservatorio.dart';
+import 'package:lema_predial/models/chart_data.dart';
+import 'package:lema_predial/models/reservatorio.dart';
 import 'package:lema_predial/utils/constants.dart';
 
 class Reservatorios with ChangeNotifier {
+  List<dynamic> _datas = [];
+  List<ChartData> _chartData = [];
   List<Reservatorio> _reservatoriosList = [];
   Timer? _syncApiTimer;
   late int idx;
 
   List<Reservatorio> get reservatoriosList => [..._reservatoriosList];
+  List<ChartData> get chartData => [..._chartData];
+
+  //List<ChartData> get registrosList => [..._listRegistros];
 
   int get listCount {
     return _reservatoriosList.length;
@@ -51,7 +58,39 @@ class Reservatorios with ChangeNotifier {
     }
 
     notifyListeners();
-    _autoSyncAPI();
+    //_autoSyncAPI();
+    return Future.value();
+  }
+
+  Future<void> loadHistoric(String date) async {
+    final response = await http.get(
+      Uri.parse('${Constants.API_URL}/get_relatorio_caixa_a.php?data=${date}'),
+    );
+    // var datas = json.decode(response.body);
+    _datas = json.decode(response.body);
+    //print(_datas);
+
+    if (_datas != null) {
+      _datas as List<dynamic>;
+      _chartData = _datas.map((registro) {
+        return ChartData(
+          DateTime.parse('${registro['caa_data']} ${registro['caa_hora']}'),
+          ((([
+                        (registro['caa_boia1'] == '0'),
+                        (registro['caa_boia2'] == '0'),
+                        (registro['caa_boia3'] == '0'),
+                        (registro['caa_boia4'] == '0'),
+                        (registro['caa_boia5'] == '0'),
+                        (registro['caa_boia6'] == '0'),
+                        (registro['caa_boia7'] == '0'),
+                      ].where((boia) => boia).length) /
+                      6) *
+                  100)
+              .ceil(),
+        );
+      }).toList();
+    }
+
     return Future.value();
   }
 
@@ -64,8 +103,8 @@ class Reservatorios with ChangeNotifier {
       //print(timer.tick);
       //count++;
       //if (count % 3 == 0) {
-        loadInfos();
-     // }
+      loadInfos();
+      // }
     });
   }
 }
