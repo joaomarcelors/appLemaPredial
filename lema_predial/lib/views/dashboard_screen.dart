@@ -3,6 +3,7 @@ import 'package:lema_predial/data/file_names.dart';
 import 'package:lema_predial/providers/bombas_cisterna.dart';
 import 'package:lema_predial/providers/reservatorios.dart';
 import 'package:lema_predial/providers/portoes_garagem.dart';
+import 'package:lema_predial/widgets/app_drawer.dart';
 import 'package:lema_predial/widgets/bcis_widget.dart';
 import 'package:lema_predial/widgets/build_container.dart';
 import 'package:lema_predial/widgets/reservatorio_widget.dart';
@@ -22,8 +23,10 @@ class DashBoardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Painel de Leitura'),
+        centerTitle: false,
         backgroundColor: Theme.of(context).primaryColor,
       ),
+      drawer: AppDrawer(),
       body: RefreshIndicator(
         onRefresh: () => _refreshInfos(context),
         child: FutureBuilder(

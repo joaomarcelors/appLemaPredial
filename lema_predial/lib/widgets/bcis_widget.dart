@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lema_predial/models/bomba_cisterna.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BcisWidget extends StatelessWidget {
   final BombaCisterna? bcis;

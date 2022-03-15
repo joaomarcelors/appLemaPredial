@@ -12,6 +12,7 @@ class AuthOrHomeScreen extends StatelessWidget {
     Auth auth = Provider.of(context);
 
     return FutureBuilder(
+      future: auth.tryAutoLogin(),
       builder: (ctx, snapshot){
         if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator());

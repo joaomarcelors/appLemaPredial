@@ -74,7 +74,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                 }
                 return null;
               },
-              onSaved: (value) => _authData['user'] = value!,
+              onSaved: (value) => _authData['user'] = value!.trim(),
             ),
             TextFormField(
               cursorColor: Theme.of(context).primaryColor,
