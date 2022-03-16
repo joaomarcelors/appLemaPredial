@@ -6,7 +6,7 @@ class AuthException implements Exception {
   @override
   String toString(){
     if(key.contains('INCORRECT')){
-      return 'Usuário e/ou Senha inválido';
+      return 'Usuário e/ou Senha inválido.';
     }else{
       return 'Ocorreu um erro na autentificação!';
     }

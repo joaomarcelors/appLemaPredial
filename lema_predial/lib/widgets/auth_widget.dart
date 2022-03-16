@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lema_predial/exceptions/auth_exception.dart';
 import 'package:lema_predial/providers/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,25 @@ class _AuthWidgetState extends State<AuthWidget> {
     'password': '',
   };
 
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Ocorreu um erro!'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'Fechar',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) {
       return;
@@ -32,10 +52,16 @@ class _AuthWidgetState extends State<AuthWidget> {
 
     Auth auth = Provider.of(context, listen: false);
 
-    await auth.login(_authData['user']!, _authData['password']!);
+    try {
+      await auth.login(_authData['user']!, _authData['password']!);
+    } on AuthException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog('Ocorreu um erro inesperado!');
+    }
 
     setState(() {
-      _isLoading = true;
+      _isLoading = false;
     });
   }
 

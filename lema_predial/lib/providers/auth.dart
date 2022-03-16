@@ -28,7 +28,7 @@ class Auth with ChangeNotifier {
 
     if ((responseBody.isEmpty)) {
       print('usuario/senha invalidos');
-      //throw AuthException('INCORRECT');
+      throw AuthException('INCORRECT');
     } else {
       _isAuth = true;
       _usuCod = responseBody[0]['usu_cod'];
