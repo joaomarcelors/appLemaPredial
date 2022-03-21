@@ -45,7 +45,7 @@ class BcisWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Lato'),
             ),
-            Text('${Random().nextDouble().toStringAsFixed(4)}'),
+            //Text('${Random().nextDouble().toStringAsFixed(4)}'),
           ],
         ),
         Row(

@@ -49,7 +49,7 @@ class PortaoGaragemWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Lato'),
             ),
-            Text('${Random().nextDouble().toStringAsFixed(4)}'),
+            //Text('${Random().nextDouble().toStringAsFixed(4)}'),
           ],
         ),
         if (portao!.status)

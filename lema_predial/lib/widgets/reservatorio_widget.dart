@@ -62,7 +62,7 @@ class reservatorioWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text('${Random().nextDouble().toStringAsFixed(4)}'),
+              //Text('${Random().nextDouble().toStringAsFixed(4)}'),
             ],
           ),
           Column(
